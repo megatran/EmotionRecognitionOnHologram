@@ -17,6 +17,7 @@ from sklearn.metrics import confusion_matrix
 
 import imageDataExtract as dataset
 
+import requests
 
 # For recording
 import cv2
@@ -98,7 +99,7 @@ if mode == 'p':
 		# normalize inputs from 0-255 to 0.0-1.0
 		img = img.astype('float32')
 
-		
+
 		# Final evaluation of the model
 		pred = model.predict_classes(img, 1, verbose=0)
 
@@ -124,7 +125,7 @@ elif mode == 'v':
 
 
 		while True:
-		    
+
 		    ret, old_frame = cap.read()
 
 		    '''
@@ -139,7 +140,7 @@ elif mode == 'v':
 
 		    if len(face) == 0:
 			continue
-		    else: 
+		    else:
 			print 'Detected'
 			for (x,y,w,h) in face:
 			    #focused_face = old_frame[y: y+h, x: x+w]
@@ -147,36 +148,40 @@ elif mode == 'v':
 			    #cv2.rectangle(old_frame, (x,y), (x+w, y+h), (0,255,0),2)
 
 
-				
+
                             pil_im = Image.fromarray(img)
 			    img2 = pil_im.resize((32, 32), Image.ANTIALIAS)
 
 			    img2.save('1.png')
-				
+
 			    cvimg = numpy.array(img2.convert('RGB'))
 			    img = cv2.cvtColor(cvimg[:, :, ::-1].copy(), cv2.COLOR_BGR2GRAY)
-	
+
 			    print img.shape
-	
-			    img = numpy.array([numpy.array([img])])			
-			    	
-		
+
+			    img = numpy.array([numpy.array([img])])
+
+
 			    # normalize inputs from 0-255 to 0.0-1.0
 			    img = img.astype('float32')
 
-			
+
 			    # Final evaluation of the model
-				
+
 			    json = open("./test.json", "w")
-			    
+
 			    pred = model.predict_classes(img, 1, verbose=0)
 
 			    print i, ' ', output[pred[0]]
 			    print ''
 			    print ''
 			    print ''
-			
+
 			    strTemp = '{\n "classification": "' + output[pred[0]] + '"\n}\n'
 			    json.write(strTemp)
 			    json.close()
+
+				requests.post('http://localhost:8080/emotion',
+				              data = '{"classification": "%s", "level": %d}' % (output[pred[0]], 10))
+
 			    i = i + 1
