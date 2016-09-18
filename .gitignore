@@ -1,0 +1,4 @@
+*.bin
+*.info
+/Temp/
+/Library/metadata/
