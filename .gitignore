@@ -1,4 +1,4 @@
 *.bin
 *.info
-/Temp/
-/Library/metadata/
+EmotionalExpressionUnity/Temp/
+EmotionalExpressionUnity/Library/metadata/
