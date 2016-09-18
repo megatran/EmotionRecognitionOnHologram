@@ -13,7 +13,7 @@ from keras.layers.convolutional import Convolution2D
 from keras.layers.convolutional import MaxPooling2D
 from keras.utils import np_utils
 
-from sklearn.metrics import confusion_matrix
+#from sklearn.metrics import confusion_matrix
 
 import imageDataExtract as dataset
 
@@ -27,12 +27,17 @@ from PIL import Image
 seed = 7
 numpy.random.seed(seed)
 
+'''
 while True:
 	print 'Press [p] for path or [v] for video'
 	mode = raw_input()
 
 	if mode == 'p' or mode == 'v':
 		break
+'''
+
+mode = 'v'
+
 '''
 # load data
 imgPath = 'images/sad/anthony_0_9.png'
@@ -83,7 +88,7 @@ model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy
 
 
 # Final evaluation of the model
-pred = model.predict_classes(img, 1, verbose=0)
+#pred = model.predict_classes(img, 1, verbose=0)
 
 #print output[pred[0]]
 #print ''
@@ -167,7 +172,9 @@ elif mode == 'v':
 
 			    # Final evaluation of the model
 
-			    json = open("./test.json", "w")
+			    if i%10 == 0:
+			        json = open("./test.json", "w")
+			        print 'JSON written'
 
 			    pred = model.predict_classes(img, 1, verbose=0)
 
@@ -176,8 +183,9 @@ elif mode == 'v':
 			    print ''
 			    print ''
 
-			    requests.post('http://localhost:8080/emotion', data = ('{"classification": "%s", "level": %d}' % (output[pred[0]], 10)))
+			    requests.post('http://5b568fb2.ngrok.io/emotion', data = ('{"classification": "%s", "level": %d}' % (output[pred[0]], 10)))
 			    strTemp = '{\n "classification": "' + output[pred[0]] + '"\n}\n'
-			    json.write(strTemp)
-			    json.close()
+			    if i%10 == 0:
+			        json.write(strTemp)
+			        json.close()
 			    i = i + 1
