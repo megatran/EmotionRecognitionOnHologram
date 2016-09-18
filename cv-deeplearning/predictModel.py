@@ -146,10 +146,7 @@ elif mode == 'v':
 			    #focused_face = old_frame[y: y+h, x: x+w]
 			    img = old_gray[y: y+h, x: x+w]
 			    #cv2.rectangle(old_frame, (x,y), (x+w, y+h), (0,255,0),2)
-
-
-
-                            pil_im = Image.fromarray(img)
+			    pil_im = Image.fromarray(img)
 			    img2 = pil_im.resize((32, 32), Image.ANTIALIAS)
 
 			    img2.save('1.png')
@@ -177,11 +174,8 @@ elif mode == 'v':
 			    print ''
 			    print ''
 
+			    requests.post('http://localhost:8080/emotion', data = ('{"classification": "%s", "level": %d}' % (output[pred[0]], 10)))
 			    strTemp = '{\n "classification": "' + output[pred[0]] + '"\n}\n'
 			    json.write(strTemp)
 			    json.close()
-
-				requests.post('http://localhost:8080/emotion',
-				              data = '{"classification": "%s", "level": %d}' % (output[pred[0]], 10))
-
 			    i = i + 1
