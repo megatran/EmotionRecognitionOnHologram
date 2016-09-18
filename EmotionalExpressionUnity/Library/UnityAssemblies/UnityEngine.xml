@@ -7148,6 +7148,24 @@ The values passed to stereoTargetEye are found in the StereoTargetEyeMask enum. 
         <para>Array of command buffers.</para>
       </returns>
     </member>
+    <member name="M:UnityEngine.Camera.GetStereoProjectionMatrix(UnityEngine.Camera/StereoscopicEye)">
+      <summary>
+        <para>Get the projection matrix of a specific stereo eye.</para>
+      </summary>
+      <param name="eye">Which stereo eye matrix do you want to get?</param>
+      <returns>
+        <para>The matrix of the stereo eye.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Camera.GetStereoViewMatrix(UnityEngine.Camera/StereoscopicEye)">
+      <summary>
+        <para>Get the view matrix of a specific stereo eye.</para>
+      </summary>
+      <param name="eye">Which stereo eye matrix do you want to get?</param>
+      <returns>
+        <para>The matrix of the stereo eye.</para>
+      </returns>
+    </member>
     <member name="M:UnityEngine.Camera.RemoveAllCommandBuffers">
       <summary>
         <para>Remove all command buffers set on this camera.</para>
@@ -7265,17 +7283,31 @@ The values passed to stereoTargetEye are found in the StereoTargetEyeMask enum. 
     </member>
     <member name="M:UnityEngine.Camera.SetStereoProjectionMatrices(UnityEngine.Matrix4x4,UnityEngine.Matrix4x4)">
       <summary>
-        <para>Define the projection matrix for both stereo eye. Only work in 3D flat panel display.</para>
+        <para>Set custom projection matrices for both eyes.</para>
       </summary>
       <param name="leftMatrix">Projection matrix for the stereo left eye.</param>
-      <param name="rightMatrix">Projection matrix for the stereo left eye.</param>
+      <param name="rightMatrix">Projection matrix for the stereo right eye.</param>
+    </member>
+    <member name="M:UnityEngine.Camera.SetStereoProjectionMatrix(UnityEngine.Camera/StereoscopicEye,UnityEngine.Matrix4x4)">
+      <summary>
+        <para>Sets a custom stereo projection matrix.</para>
+      </summary>
+      <param name="eye">Which eye should the matrix be set for.</param>
+      <param name="matrix">The matrix to be set.</param>
     </member>
     <member name="M:UnityEngine.Camera.SetStereoViewMatrices(UnityEngine.Matrix4x4,UnityEngine.Matrix4x4)">
       <summary>
-        <para>Define the view matrices for both stereo eye. Only work in 3D flat panel display.</para>
+        <para>Set custom view matrices for both eyes.</para>
       </summary>
       <param name="leftMatrix">View matrix for the stereo left eye.</param>
       <param name="rightMatrix">View matrix for the stereo right eye.</param>
+    </member>
+    <member name="M:UnityEngine.Camera.SetStereoViewMatrix(UnityEngine.Camera/StereoscopicEye,UnityEngine.Matrix4x4)">
+      <summary>
+        <para>Sets a custom stereo view matrix.</para>
+      </summary>
+      <param name="eye">Which eye should the matrix be set for.</param>
+      <param name="matrix">The matrix to be set.</param>
     </member>
     <member name="M:UnityEngine.Camera.SetTargetBuffers(UnityEngine.RenderBuffer,UnityEngine.RenderBuffer)">
       <summary>
@@ -7290,6 +7322,21 @@ The values passed to stereoTargetEye are found in the StereoTargetEyeMask enum. 
       </summary>
       <param name="colorBuffer">The RenderBuffer(s) to which color information will be rendered.</param>
       <param name="depthBuffer">The RenderBuffer to which depth information will be rendered.</param>
+    </member>
+    <member name="T:UnityEngine.Camera.StereoscopicEye">
+      <summary>
+        <para>Enum used to specify either the left or the right eye of a stereoscopic camera.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.Camera.StereoscopicEye.Left">
+      <summary>
+        <para>Specifies the target to be the left eye.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.Camera.StereoscopicEye.Right">
+      <summary>
+        <para>Specifies the target to be the right eye.</para>
+      </summary>
     </member>
     <member name="M:UnityEngine.Camera.ViewportPointToRay(UnityEngine.Vector3)">
       <summary>
@@ -30957,7 +31004,7 @@ If a string, the string will be converted to raw bytes via &lt;a href="http:msdn
     </member>
     <member name="P:UnityEngine.ParticleSystem.randomSeed">
       <summary>
-        <para>Random seed used for the particle system emission. If set to 0, it will be assigned a random value on awake.</para>
+        <para>Override the random seed used for the particle system emission.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.ParticleSystem.rotationBySpeed">
@@ -31048,6 +31095,11 @@ If a string, the string will be converted to raw bytes via &lt;a href="http:msdn
     <member name="P:UnityEngine.ParticleSystem.trigger">
       <summary>
         <para>Access the particle system trigger module.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.ParticleSystem.useAutoRandomSeed">
+      <summary>
+        <para>Set to false to support providing your own random seed for the Particle System.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.ParticleSystem.velocityOverLifetime">
@@ -44655,6 +44707,11 @@ Returns NULL if there is no associated alpha texture for the source sprite. This
     <member name="T:UnityEngine.Tizen.Window">
       <summary>
         <para>Interface into Tizen specific functionality.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Tizen.Window.evasGL">
+      <summary>
+        <para>Get pointer to the Tizen EvasGL object..</para>
       </summary>
     </member>
     <member name="P:UnityEngine.Tizen.Window.windowHandle">
