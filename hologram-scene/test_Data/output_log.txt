@@ -1,0 +1,30 @@
+Initialize engine version: 5.1.0f3 (ec70b008569d)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: Intel(R) HD Graphics 5300 (ID=0x161e)
+    Vendor:   Intel
+    VRAM:     128 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\Anthony Lowhur\Documents\Programming\Unity\git-projects\projection-test\hologram_test\test_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\Anthony Lowhur\Documents\Programming\Unity\git-projects\projection-test\hologram_test\test_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\Anthony Lowhur\Documents\Programming\Unity\git-projects\projection-test\hologram_test\test_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\Anthony Lowhur\Documents\Programming\Unity\git-projects\projection-test\hologram_test\test_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\Anthony Lowhur\Documents\Programming\Unity\git-projects\projection-test\hologram_test\test_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\Anthony Lowhur\Documents\Programming\Unity\git-projects\projection-test\hologram_test\test_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\Anthony Lowhur\Documents\Programming\Unity\git-projects\projection-test\hologram_test\test_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\Anthony Lowhur\Documents\Programming\Unity\git-projects\projection-test\hologram_test\test_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\Anthony Lowhur\Documents\Programming\Unity\git-projects\projection-test\hologram_test\test_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
+Loading C:\Users\Anthony Lowhur\Documents\Programming\Unity\git-projects\projection-test\hologram_test\test_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
+Platform assembly: C:\Users\Anthony Lowhur\Documents\Programming\Unity\git-projects\projection-test\hologram_test\test_Data\Managed\LeapCSharp.NET3.5.dll (this message is harmless)
+Loading C:\Users\Anthony Lowhur\Documents\Programming\Unity\git-projects\projection-test\hologram_test\test_Data\Managed\LeapCSharp.NET3.5.dll into Unity Child Domain
+- Completed reload, in  0.174 seconds
+desktop: 3200x1800 60Hz; virtual: 3200x1800 at 0,0
+<RI> Initializing input.
+XInput1_3.dll not found. Trying XInput9_1_0.dll instead...
+<RI> Input initialized.
+<RI> Initialized touch support.
+Platform assembly: C:\Users\Anthony Lowhur\Documents\Programming\Unity\git-projects\projection-test\hologram_test\test_Data\Managed\System.dll (this message is harmless)
+Platform assembly: C:\Users\Anthony Lowhur\Documents\Programming\Unity\git-projects\projection-test\hologram_test\test_Data\Managed\System.Core.dll (this message is harmless)
+Setting up 1 worker threads for Enlighten.
+  Thread -> id: 2d0c -> priority: 1 
