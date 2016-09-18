@@ -16,17 +16,13 @@ public class ShapeManagement : MonoBehaviour {
 
     void Update()
     {
-        int emotionVal = 0;
-        if (emotionData.Classification.Equals("angry", StringComparison.InvariantCultureIgnoreCase)) {
-            emotionVal = 0;
-        } else if (emotionData.Classification.Equals("happy", StringComparison.InvariantCultureIgnoreCase)) {
-            emotionVal = 1;
-        }
+        int emotionVal = emotionData.getEmotionNumber();
 
         if (thisSkinnedMeshRenderer.GetBlendShapeWeight(emotionVal) < 100f)
         {
-            thisSkinnedMeshRenderer.SetBlendShapeWeight(emotionVal, weightValue);
-            weightValue += speed;
+            thisSkinnedMeshRenderer.SetBlendShapeWeight(emotionVal, emotionData.WeightValue);
+            thisSkinnedMeshRenderer.SetBlendShapeWeight((emotionVal + 1) % 2, 0);
+            emotionData.WeightValue += speed;
         }
     }
 }
