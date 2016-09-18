@@ -26,38 +26,12 @@ from PIL import Image
 # fix random seed for reproducibility
 seed = 7
 numpy.random.seed(seed)
-
-'''
-while True:
-	print 'Press [p] for path or [v] for video'
-	mode = raw_input()
-
-	if mode == 'p' or mode == 'v':
-		break
-'''
-
 mode = 'v'
-
-'''
-# load data
-imgPath = 'images/sad/anthony_0_9.png'
-'''
 
 num_classes = 3
 
 output = ['Sad','Happy','Angry']
 
-
-#img = dataset.pathToVector(imgPath)
-
-
-# normalize inputs from 0-255 to 0.0-1.0
-#img = img.astype('float32')
-
-#print img.shape
-
-
-#img = img / 255.0
 
 # Create the model
 model = Sequential()
@@ -73,7 +47,6 @@ model.add(Dense(num_classes, activation='softmax'))
 
 
 model.load_weights("models/model-0.h5")
-#model.load_weights("checkpoint/weights-improvement-75-0.1966-bigger.hdf5")
 
 # Compile model
 
@@ -86,36 +59,7 @@ sgd = SGD(lr=lrate, momentum=0.9, decay=decay, nesterov=False)
 model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
 
 
-
-# Final evaluation of the model
-#pred = model.predict_classes(img, 1, verbose=0)
-
-#print output[pred[0]]
-#print ''
-#print ''
-#print ''
-
-
-if mode == 'p':
-	while True:
-		print 'Type in another path to make a prediction:'
-		path = raw_input()
-
-		img = dataset.pathToVector(path)
-
-		# normalize inputs from 0-255 to 0.0-1.0
-		img = img.astype('float32')
-
-
-		# Final evaluation of the model
-		pred = model.predict_classes(img, 1, verbose=0)
-
-		print output[pred[0]]
-		print ''
-		print ''
-		print ''
-
-elif mode == 'v':
+if mode == 'v':
 
 	tar_height = 32
 	tar_width = 32
