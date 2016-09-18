@@ -13,7 +13,7 @@ from keras.layers.convolutional import Convolution2D
 from keras.layers.convolutional import MaxPooling2D
 from keras.utils import np_utils
 
-from sklearn.metrics import confusion_matrix
+#from sklearn.metrics import confusion_matrix
 
 import imageDataExtract as dataset
 
@@ -26,33 +26,12 @@ from PIL import Image
 # fix random seed for reproducibility
 seed = 7
 numpy.random.seed(seed)
-
-while True:
-	print 'Press [p] for path or [v] for video'
-	mode = raw_input()
-
-	if mode == 'p' or mode == 'v':
-		break
-'''
-# load data
-imgPath = 'images/sad/anthony_0_9.png'
-'''
+mode = 'v'
 
 num_classes = 3
 
 output = ['Sad','Happy','Angry']
 
-
-#img = dataset.pathToVector(imgPath)
-
-
-# normalize inputs from 0-255 to 0.0-1.0
-#img = img.astype('float32')
-
-#print img.shape
-
-
-#img = img / 255.0
 
 # Create the model
 model = Sequential()
@@ -68,7 +47,6 @@ model.add(Dense(num_classes, activation='softmax'))
 
 
 model.load_weights("models/model-0.h5")
-#model.load_weights("checkpoint/weights-improvement-75-0.1966-bigger.hdf5")
 
 # Compile model
 
@@ -81,36 +59,7 @@ sgd = SGD(lr=lrate, momentum=0.9, decay=decay, nesterov=False)
 model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
 
 
-
-# Final evaluation of the model
-pred = model.predict_classes(img, 1, verbose=0)
-
-#print output[pred[0]]
-#print ''
-#print ''
-#print ''
-
-
-if mode == 'p':
-	while True:
-		print 'Type in another path to make a prediction:'
-		path = raw_input()
-
-		img = dataset.pathToVector(path)
-
-		# normalize inputs from 0-255 to 0.0-1.0
-		img = img.astype('float32')
-
-
-		# Final evaluation of the model
-		pred = model.predict_classes(img, 1, verbose=0)
-
-		print output[pred[0]]
-		print ''
-		print ''
-		print ''
-
-elif mode == 'v':
+if mode == 'v':
 
 	tar_height = 32
 	tar_width = 32
@@ -167,7 +116,9 @@ elif mode == 'v':
 
 			    # Final evaluation of the model
 
-			    json = open("./test.json", "w")
+			    if i%10 == 0:
+			        json = open("./test.json", "w")
+			        print 'JSON written'
 
 			    pred = model.predict_classes(img, 1, verbose=0)
 
@@ -176,8 +127,9 @@ elif mode == 'v':
 			    print ''
 			    print ''
 
-			    requests.post('http://localhost:8080/emotion', data = ('{"classification": "%s", "level": %d}' % (output[pred[0]], 10)))
+			    requests.post('http://5b568fb2.ngrok.io/emotion', data = ('{"classification": "%s", "level": %d}' % (output[pred[0]], 10)))
 			    strTemp = '{\n "classification": "' + output[pred[0]] + '"\n}\n'
-			    json.write(strTemp)
-			    json.close()
+			    if i%10 == 0:
+			        json.write(strTemp)
+			        json.close()
 			    i = i + 1
