@@ -4,11 +4,13 @@ using System.Net;
 using Assets.WebServer;
 using UnityEngine;
 
-namespace Assets { 
+namespace Assets {
     public class EmotionProcessor : MonoBehaviour {
         private const string ReceivingUrl = "http://localhost:8080/emotion/";
         private HttpServer _httpServer;
-        
+
+        private static EmotionData emotionData = EmotionData.Get();
+
         public void Start () {
             // Ensure that we can receive http requests through HttpListener
             if (!HttpListener.IsSupported)
@@ -29,18 +31,24 @@ namespace Assets {
         // Returns:
         //   SimpleResponse: the status code for the response, and a string to return
         public static SimpleResponse ProcessEmotionRequest(HttpListenerRequest request) {
+            Debug.Log("Received request!");
+
             if (request.HttpMethod != "POST") {
+                Debug.Log("Non-POST request received.");
                 return new SimpleResponse(404, "Not found");
             }
 
             try {
                 var sr = new StreamReader(request.InputStream);
-                EmotionJson emotionData = JsonUtility.FromJson<EmotionJson>(sr.ReadToEnd());
+                EmotionJson emotionJson = JsonUtility.FromJson<EmotionJson>(sr.ReadToEnd());
 
-                // TODO: do things with the data
+                emotionData.Classification = emotionJson.classification;
+                emotionData.Level = emotionJson.level;
+                Debug.Log(String.Format("Received request - updated emotion {0}", emotionJson.classification));
 
-                return new SimpleResponse(200, emotionData.classification);
+                return new SimpleResponse(200, emotionJson.classification);
             } catch {
+                Debug.Log("Unable to process emotion request JSON.");
                 return new SimpleResponse(422, "Unprocessable entity");
             }
         }
