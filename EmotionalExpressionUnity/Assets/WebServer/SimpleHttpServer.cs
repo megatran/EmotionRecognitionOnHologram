@@ -47,10 +47,11 @@ namespace Assets.WebServer {
                                 SimpleResponse resp = _responderMethod(ctx.Request);
 
                                 ctx.Response.StatusCode = resp.Status;
-                                string rstr = resp.Response;
+                                string rstr = String.Format("{{ \"status\": {0}, \"message\": \"{1}\" }}", resp.Status, resp.Message);
                                 byte[] buf = Encoding.UTF8.GetBytes(rstr);
                                 ctx.Response.ContentLength64 = buf.Length;
                                 ctx.Response.OutputStream.Write(buf, 0, buf.Length);
+                                ctx.Response.ContentType = "application/json";
                             } catch (Exception e) {
                                 Console.WriteLine("Exception prepraring response string : {0}", e);
                             } finally {

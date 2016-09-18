@@ -1,4 +1,6 @@
-﻿using System.Net;
+﻿using System;
+using System.IO;
+using System.Net;
 using Assets.WebServer;
 using UnityEngine;
 
@@ -27,12 +29,20 @@ namespace Assets {
         // Returns:
         //   SimpleResponse: the status code for the response, and a string to return
         public static SimpleResponse ProcessEmotionRequest(HttpListenerRequest request) {
-            int status = 200;
-            string response = "It's working!";
+            if (request.HttpMethod != "POST") {
+                return new SimpleResponse(404, "Not found");
+            }
 
-            // TODO: deserialize and process emotion data
+            try {
+                var sr = new StreamReader(request.InputStream);
+                EmotionJson emotionData = JsonUtility.FromJson<EmotionJson>(sr.ReadToEnd());
 
-            return new SimpleResponse(status, response);
+                // TODO: do things with the data
+
+                return new SimpleResponse(200, emotionData.classification);
+            } catch {
+                return new SimpleResponse(422, "Unprocessable entity");
+            }
         }
 
         public void OnDestroy() {
