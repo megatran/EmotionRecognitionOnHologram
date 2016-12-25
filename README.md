@@ -1,4 +1,8 @@
-# EmotionRecognitionOnHologram
+<p align = "center">
+    <img src="https://challengepost-s3-challengepost.netdna-ssl.com/photos/production/software_photos/000/411/009/datas/gallery.jpg" />
+</p>
+
+<br>
 
 A project in Hack the North 2016--Canada's biggest hackathon
 
